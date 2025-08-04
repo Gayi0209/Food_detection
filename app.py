@@ -8,6 +8,18 @@ import glob
 from yolo_detector import count_unique_objects
 
 # ---- RAW MATERIALS PER FOOD ITEMS ----
+import gdown
+import os
+
+model_path = "model.pt"
+gdrive_id = "10ro9v7RGzeLNzochKdFmZaZAy4pXm6hq"
+gdrive_url = f"https://drive.google.com/uc?id={gdrive_id}"
+
+# Download the model if it doesn't exist
+if not os.path.exists(model_path):
+    with st.spinner("📥 Downloading model.pt from Google Drive..."):
+        gdown.download(gdrive_url, model_path, quiet=False)
+
 RAW_MATERIALS_USAGE = {
      'biryani': {'rice': 0.15, 'meat': 0.1, 'onions': 0.05, 'spices': 0.02, 'oil': 0.02},
     'chapathi': {'flour': 0.05, 'oil': 0.005, 'salt': 0.001},
@@ -258,4 +270,5 @@ if existing_files:
             except:
                 st.write(f"• **{file}** - Error reading file")
 else:
+
     st.write("📝 No detection files found yet.")
