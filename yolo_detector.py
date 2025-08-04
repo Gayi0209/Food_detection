@@ -23,7 +23,7 @@ def count_unique_objects(video_path, output_path, model_path):
         if not ret:
             break
 
-        results = model.track(frame, persist=True, conf=0.3, imgsz=640)[0]
+        results = model(frame, conf=0.3, imgsz=640)[0]
 
         if results is not None and results.boxes.id is not None:
             boxes = results.boxes
@@ -52,3 +52,4 @@ def count_unique_objects(video_path, output_path, model_path):
     df.to_csv(csv_path, index=False)
 
     return output_path, csv_path, df
+
