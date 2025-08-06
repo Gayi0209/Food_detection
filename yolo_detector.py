@@ -48,11 +48,12 @@ def count_unique_objects(video_path, output_path, model_path):
     cap.release()
     out.release()
 
-    date_str = datetime.now().strftime("%Y-%m-%d")
+    date_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     df = pd.DataFrame(object_counts.items(), columns=["Class", "Count"])
     csv_path = f"counts_{date_str}.csv"
     df.to_csv(csv_path, index=False)
 
     return output_path, csv_path, df
+
 
 
